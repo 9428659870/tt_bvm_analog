@@ -1,0 +1,91 @@
+* ============================================================
+* tb_bg_core.spice -- transistor-level SC bandgap core
+*
+* Same stimulus, timing and acceptance as tb_sc_ideal.spice, with
+* every ideal switch and current source replaced by devices. If the
+* ideal version passes and this does not, the difference is switch
+* resistance, charge injection or mirror accuracy -- not topology.
+* ============================================================
+
+.lib $PDK_ROOT/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+.include "sc_ota.spice"
+.include "bandgap_core.spice"
+
+.param tslot = 5.12u
+.param tdead = 40n
+.param tclk  = 20n
+.param VCM   = 0.9
+
+Vdd VDD 0 1.8
+Vss VSS 0 0
+Vcm vcm 0 {VCM}
+
+* ---- phases, identical to the ideal testbench -------------------
+Vphi1 phi1 0 PULSE(0 1.8 {tdead} 1n 1n '{tslot}-2*{tdead}' '2*{tslot}')
+Vphi2 phi2 0 PULSE(0 1.8 '{tslot}+{tdead}' 1n 1n '{tslot}-2*{tdead}' '2*{tslot}')
+Vi8   i8en 0 PULSE(0 1.8 0 1n 1n {tslot} '2*{tslot}')
+Vcap  capx 0 PULSE(0 1.8 '2*{tslot}-{tdead}-3*{tclk}' 1n 1n {tclk} '2*{tslot}')
+Vote  ota_en 0 1.8
+
+* ---- bias: a diode-connected NMOS carrying the reference --------
+Iref  VDD nbias 2.1u
+XMb   nbias nbias VSS VSS sky130_fd_pr__nfet_01v8 L=4 W=16 nf=1 m=1
+
+Xcore vref x nout ve phi1 phi2 capx i8en ota_en nbias vcm VDD VSS bandgap_core
+
+.control
+set color0=white
+
+echo " "
+echo "--- operating point ---"
+op
+print v(ve) v(nbias) v(nout)
+echo "v(ve) must be near 0.65 V. If it is ~0 the PNP port order is wrong."
+
+let tslot = 5.12e-6
+* NOTE: `let` vectors live in the CURRENT plot, and tran
+* switches plots -- so $& of them fails in meas afterwards.
+* Measurement times are literals for that reason.
+let tstop = 16*tslot
+let tmeas = 15.5*tslot
+let t8i   = 0.9*tslot
+let t1i   = 1.9*tslot
+
+echo " "
+echo "--- 8 frames ---"
+tran 20n 81.92u
+
+let CAv = 200e-15
+let CBv = 2000e-15
+let CFv = 200e-15
+
+meas tran vref_f FIND v(vref) AT=79.36u
+meas tran ve_8i  FIND v(ve)   AT=4.608u
+meas tran ve_1i  FIND v(ve)   AT=9.728u
+
+let dvbe_meas  = ve_8i - ve_1i
+let dvbe_mv    = dvbe_meas*1e3
+let vref_ideal = (CAv*ve_8i + CBv*dvbe_meas)/CFv
+let err_mv     = (vref_f - vref_ideal)*1e3
+
+print ve_8i
+print ve_1i
+print dvbe_mv
+print vref_ideal
+print vref_f
+print err_mv
+
+echo " "
+echo "ACCEPTANCE, in order:"
+echo "  1. dvbe_mv near +53.8 mV. If not, the 8I/I steering is broken"
+echo "     and err_mv is meaningless -- both sides share the fault."
+echo "  2. err_mv under 1 mV."
+
+wrdata bg_core_trace.csv v(phi1) v(phi2) v(capx) v(ve) v(nout) v(vref)
+echo " "
+echo "trace -> bg_core_trace.csv"
+quit
+quit
+.endc
+.end

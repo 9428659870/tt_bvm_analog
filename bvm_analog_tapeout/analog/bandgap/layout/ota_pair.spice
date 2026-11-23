@@ -1,0 +1,17 @@
+* NGSPICE file created from ota_pair.ext - technology: sky130A
+
+.subckt unit_n10_l4 D S G VSUBS
+X0 S G D VSUBS sky130_fd_pr__nfet_01v8 ad=2.9 pd=20.58 as=2.9 ps=20.58 w=10 l=4
+.ends
+
+.subckt ota_pair n1a n1
+Xu5_B n1 n1a n1a VSUBS unit_n10_l4
+Xu3_A n1a n1a n1a VSUBS unit_n10_l4
+Xu1_B n1 n1a n1a VSUBS unit_n10_l4
+Xu6_B n1 n1a n1a VSUBS unit_n10_l4
+Xu4_A n1a n1a n1a VSUBS unit_n10_l4
+Xu2_B n1 n1a n1a VSUBS unit_n10_l4
+Xu0_A n1a n1a n1a VSUBS unit_n10_l4
+Xu7_A n1a n1a n1a VSUBS unit_n10_l4
+.ends
+

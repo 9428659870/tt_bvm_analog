@@ -1,0 +1,42 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 0
+use cd_p2_l015 u_mp
+timestamp 0
+transform 1 0 0 0 1 1900
+box -211 1481 211 2319
+use cd_n1_l015 u_mn
+timestamp 0
+transform 1 0 0 0 1 900
+box -211 590 211 1210
+<< viali >>
+rect -60 626 60 660
+rect -60 2249 60 2283
+rect 141 872 175 928
+rect 141 1872 175 1928
+<< metal1 >>
+rect -111 855 -21 945
+rect -111 1955 -21 2045
+rect -74 612 74 674
+rect -74 2235 74 2297
+rect -45 722 45 768
+rect -45 2141 45 2187
+rect -29 1032 29 1659
+rect 21 855 200 945
+rect 21 1855 200 1945
+<< via1 >>
+rect -96 870 -36 930
+rect -96 1970 -36 2030
+<< metal2 >>
+rect -111 855 -21 2045
+<< labels >>
+rlabel metal1 0 1345 0 1345 0 a
+port 1 nsew
+rlabel metal2 -66 1450 -66 1450 0 y
+port 2 nsew
+rlabel metal1 0 2266 0 2266 0 VDD
+port 3 nsew
+rlabel metal1 0 643 0 643 0 VSS
+port 4 nsew
+<< end >>

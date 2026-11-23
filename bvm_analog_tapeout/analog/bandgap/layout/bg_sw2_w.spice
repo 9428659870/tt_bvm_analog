@@ -1,0 +1,11 @@
+* NGSPICE file created from bg_sw2_w.ext - technology: sky130A
+
+.subckt bg_sw2 B D0 G S1 a_63_n400#
+X0 a_63_n400# G S1 B sky130_fd_pr__nfet_01v8 ad=1.24 pd=8.62 as=0.66 ps=4.33 w=4 l=0.15
+X1 S1 G D0 B sky130_fd_pr__nfet_01v8 ad=0.66 pd=4.33 as=1.24 ps=8.62 w=4 l=0.15
+.ends
+
+.subckt bg_sw2_w D S G B
+Xu_dev B D G S D bg_sw2
+.ends
+

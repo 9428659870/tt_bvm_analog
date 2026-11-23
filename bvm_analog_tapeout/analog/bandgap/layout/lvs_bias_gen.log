@@ -1,0 +1,292 @@
+
+Circuit 1 cell sky130_fd_pr__nfet_01v8 and Circuit 2 cell sky130_fd_pr__nfet_01v8 are black boxes.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_pr__nfet_01v8         |Circuit 2: sky130_fd_pr__nfet_01v8         
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_pr__nfet_01v8 and sky130_fd_pr__nfet_01v8 are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw16                         |Circuit 2: bg_sw16                         
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (16)               |sky130_fd_pr__nfet_01v8 (16)               
+Number of devices: 16                      |Number of devices: 16                      
+Number of nets: 19                         |Number of nets: 19                         
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw16                         |Circuit 2: bg_sw16                         
+-------------------------------------------|-------------------------------------------
+D0                                         |D0                                         
+a_735_n400#                                |D16 **Mismatch**                           
+G                                          |G                                          
+B                                          |B                                          
+D14                                        |D14                                        
+D2                                         |D2                                         
+D4                                         |D4                                         
+D12                                        |D12                                        
+D8                                         |D8                                         
+S7                                         |S7                                         
+S9                                         |S9                                         
+D10                                        |D10                                        
+D6                                         |D6                                         
+S11                                        |S11                                        
+S5                                         |S5                                         
+S3                                         |S3                                         
+S13                                        |S13                                        
+S1                                         |S1                                         
+S15                                        |S15                                        
+---------------------------------------------------------------------------------------
+Cell pin lists for bg_sw16 and bg_sw16 altered to match.
+Device classes bg_sw16 and bg_sw16 are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw2                          |Circuit 2: bg_sw2                          
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (2)                |sky130_fd_pr__nfet_01v8 (2)                
+Number of devices: 2                       |Number of devices: 2                       
+Number of nets: 5                          |Number of nets: 5                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw2                          |Circuit 2: bg_sw2                          
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+S1                                         |S1                                         
+B                                          |B                                          
+D0                                         |D0                                         
+a_63_n400#                                 |D2 **Mismatch**                            
+---------------------------------------------------------------------------------------
+Cell pin lists for bg_sw2 and bg_sw2 altered to match.
+Device classes bg_sw2 and bg_sw2 are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw4                          |Circuit 2: bg_sw4                          
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (4)                |sky130_fd_pr__nfet_01v8 (4)                
+Number of devices: 4                       |Number of devices: 4                       
+Number of nets: 7                          |Number of nets: 7                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw4                          |Circuit 2: bg_sw4                          
+-------------------------------------------|-------------------------------------------
+a_159_n400#                                |D4 **Mismatch**                            
+D0                                         |D0                                         
+G                                          |G                                          
+B                                          |B                                          
+D2                                         |D2                                         
+S1                                         |S1                                         
+S3                                         |S3                                         
+---------------------------------------------------------------------------------------
+Cell pin lists for bg_sw4 and bg_sw4 altered to match.
+Device classes bg_sw4 and bg_sw4 are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw8                          |Circuit 2: bg_sw8                          
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (8)                |sky130_fd_pr__nfet_01v8 (8)                
+Number of devices: 8                       |Number of devices: 8                       
+Number of nets: 11                         |Number of nets: 11                         
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw8                          |Circuit 2: bg_sw8                          
+-------------------------------------------|-------------------------------------------
+D0                                         |D0                                         
+a_351_n400#                                |D8 **Mismatch**                            
+G                                          |G                                          
+B                                          |B                                          
+D4                                         |D4                                         
+S3                                         |S3                                         
+S5                                         |S5                                         
+D6                                         |D6                                         
+D2                                         |D2                                         
+S7                                         |S7                                         
+S1                                         |S1                                         
+---------------------------------------------------------------------------------------
+Cell pin lists for bg_sw8 and bg_sw8 altered to match.
+Device classes bg_sw8 and bg_sw8 are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_n4_l2                        |Circuit 2: bg_n4_l2                        
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (1)                |sky130_fd_pr__nfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_n4_l2                        |Circuit 2: bg_n4_l2                        
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+VSUBS                                      |VSUBS                                      
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bg_n4_l2 and bg_n4_l2 are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw16_w                       |Circuit 2: bg_sw16_w                       
+-------------------------------------------|-------------------------------------------
+bg_sw16 (1)                                |bg_sw16 (1)                                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw16_w                       |Circuit 2: bg_sw16_w                       
+-------------------------------------------|-------------------------------------------
+S                                          |S                                          
+D                                          |D                                          
+B                                          |B                                          
+G                                          |G                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bg_sw16_w and bg_sw16_w are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw1                          |Circuit 2: bg_sw1                          
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (1)                |sky130_fd_pr__nfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw1                          |Circuit 2: bg_sw1                          
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bg_sw1 and bg_sw1 are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw2_w                        |Circuit 2: bg_sw2_w                        
+-------------------------------------------|-------------------------------------------
+bg_sw2 (1)                                 |bg_sw2 (1)                                 
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw2_w                        |Circuit 2: bg_sw2_w                        
+-------------------------------------------|-------------------------------------------
+D                                          |D                                          
+B                                          |B                                          
+G                                          |G                                          
+S                                          |S                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bg_sw2_w and bg_sw2_w are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw4_w                        |Circuit 2: bg_sw4_w                        
+-------------------------------------------|-------------------------------------------
+bg_sw4 (1)                                 |bg_sw4 (1)                                 
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw4_w                        |Circuit 2: bg_sw4_w                        
+-------------------------------------------|-------------------------------------------
+S                                          |S                                          
+D                                          |D                                          
+B                                          |B                                          
+G                                          |G                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bg_sw4_w and bg_sw4_w are equivalent.
+
+Subcircuit summary:
+Circuit 1: bg_sw8_w                        |Circuit 2: bg_sw8_w                        
+-------------------------------------------|-------------------------------------------
+bg_sw8 (1)                                 |bg_sw8 (1)                                 
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bg_sw8_w                        |Circuit 2: bg_sw8_w                        
+-------------------------------------------|-------------------------------------------
+S                                          |S                                          
+D                                          |D                                          
+B                                          |B                                          
+G                                          |G                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bg_sw8_w and bg_sw8_w are equivalent.
+
+Cell bias_gen (0) disconnected node: VDD
+Cell bias_gen (1) disconnected node: VDD
+Subcircuit summary:
+Circuit 1: bias_gen                        |Circuit 2: bias_gen                        
+-------------------------------------------|-------------------------------------------
+bg_n4_l2 (33)                              |bg_n4_l2 (33)                              
+bg_sw16_w (2)                              |bg_sw16_w (2)                              
+bg_sw1 (1)                                 |bg_sw1 (1)                                 
+bg_sw2_w (1)                               |bg_sw2_w (1)                               
+bg_sw4_w (1)                               |bg_sw4_w (1)                               
+bg_sw8_w (1)                               |bg_sw8_w (1)                               
+Number of devices: 39                      |Number of devices: 39                      
+Number of nets: 15                         |Number of nets: 15                         
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Resolving symmetries by net name.
+Netlists match with 5 symmetries.
+
+Subcircuit pins:
+Circuit 1: bias_gen                        |Circuit 2: bias_gen                        
+-------------------------------------------|-------------------------------------------
+b0                                         |b0                                         
+b1                                         |b1                                         
+b2                                         |b2                                         
+b3                                         |b3                                         
+b4                                         |b4                                         
+en                                         |en                                         
+iout                                       |iout                                       
+nbias_in                                   |nbias_in                                   
+VSS                                        |VSS                                        
+VDD                                        |VDD                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bias_gen and bias_gen are equivalent.
+
+Final result: Circuits match uniquely.
+.

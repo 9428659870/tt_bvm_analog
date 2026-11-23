@@ -1,0 +1,220 @@
+# STATUS
+
+Mixed-signal Tiny Tapeout tile, SkyWater SKY130, shuttle TTSKY26d.
+Submission closes **2026-11-30**.
+
+Reconstructed 2026-11-17 after the previous copy was lost to a bad
+redirect. The generators and SPICE files carry their own conventions in
+their headers and remain authoritative; this file is an index.
+
+## Sequencing decision (2026-11-17)
+
+"Secure the tile first": `resistor_ref` -> `out_buf` -> `bias_gen` ->
+top level -> precheck -> push. The SC bandgap core is verified in SPICE
+but its ~21-instance assembly is added only if time permits.
+
+## Magic coordinate conventions
+
+* `.mag` files are **internal units, 1 unit = 0.005 um**.
+* Magic's `box` command takes **lambda = 2 internal units**, so any box
+  argument is *half* the number in the file. Getting this wrong produced
+  a 2x-oversized `nwell_ring` that still DRC'd clean.
+* Tech-file rule values are in **nanometres**; divide by 5 for file units.
+* `w` in a device generator is **per finger**; SPICE `W` is total, so
+  `w_magic = W_spice / nf`.
+
+## Painted contacts and vias
+
+Painted contacts are **cut + enclosure** -- magic insets the real GDS cut.
+Minimum painted sizes, in internal units:
+
+| layer | min painted | house constant |
+|---|---|---|
+| `viali` (mcon, li->met1) | 34 | 34 wide, any length |
+| `via1` (met1->met2) | 52 | 60 inside a 90 met1 pad |
+| `via2` (met2->met3) | 56 | 60 |
+| `via3` (met3->met4) | 64 | 70 |
+
+Sizing these as bare cuts gave 92 "Via1 width < 0.26um" errors.
+
+## Key DRC rules in play
+
+* `met1.2` spacing 28 ; `met2.2` spacing 28.
+* `met1.4` -- met1 must overlap an li contact by >= 6. Matching met1 to
+  the viali exactly in x gave 6 errors on the `mirror_load` taps; widen.
+* `met1.6` -- 0.083 um^2 minimum area = 3320 units^2. Every L=0.15 device
+  has gate-contact islands of 58 x 46 = 0.067 um^2, so those cells are
+  **DRC-dirty standalone** and must be patched from the parent.
+* `nwell.4` -- all nwells must contain metal-connected N+ taps (enforced).
+* `nwell.2a` is `touching_ok`, so abutting wells merge.
+* `capm.8` -- no via may land inside a MIM capacitor's footprint. Cap met3
+  reaches the cell boundary but capm starts 40 units in, and capm.8 needs
+  20 units to a via2 that is itself 56 wide.
+
+## Device cell geometry (guard = 1)
+
+Guard rings are **continuous**: `p/nsubdiffcont` on the straight runs with
+`p/nsubdiff` + `locali` filling the corners. One node, tappable anywhere.
+They carry li but **no met1** -- tying them to a supply is the caller's
+job, and DRC stays silent if it is omitted. Same trap as `nwell_draw`,
+which draws well + tap ring but stops at li.
+
+Ring coordinates, relative to device centre:
+
+    left/right verticals     x cx +/-(326..360), y cy +/- H
+    top/bottom horizontals   x cx +/-264,        y cy +/-(H+62 .. H+96)
+
+D/S met1 strips are only **46 units wide** -- narrower than a painted
+via1 -- so every terminal needs a widened met1 pad. Widening outward
+leaves exactly 30 units to the guard ring against met1.2's 28.
+
+Gate brackets come within **10 units** of the D/S strips in x, legal only
+as a corner diagonal, so there is **no met1 escape straight up or down**:
+
+* diode-connected devices: D and G are one net, so paint across the gap.
+* non-diode devices: the terminal must leave on met2.
+* S and the local guard ring are the same supply, so bridge S sideways
+  onto the ring vertical and tap there -- avoids the problem entirely.
+
+Device gate rails claim met1 at **both** ends, blocking vertical met1
+escape. Measured rails: `unit_n10_l4` x +/-396, y +/-(1032..1078);
+`unit_p10_l1` x +/-96, y +/-(1041..1087); `unit_p5_l2` x +/-196,
+y +/-(541..587).
+
+## Multi-finger devices
+
+* `conn_gates 1` **merges** multi-finger gates. `conn_gates 2` does NOT --
+  it uniquifies the labels and produced `G, G_uq0, G_uq1, G_uq2` with the
+  gates left unconnected.
+* Diffusions still need parent-level strapping, including an **unlabelled**
+  extra contact (`a_<addr>#`).
+
+## Passive device reference
+
+| device | value |
+|---|---|
+| `res_high_po` | rho 319.8 ohm/sq, term 194.82 ohm; `val` = rho*l/w exactly |
+| `res_xhigh_po` | rho 2000 ohm/sq, term 188.2 ohm |
+| `cap_mim_m3_1` | carea 2.00 fF/um^2, cperi 0.19 fF/um, lmax/wmax 30 um |
+
+MIM square of side s: C = 2.00*s^2 + 0.76*s.
+
+**Snake resistors**: `l` is PER SEGMENT, `nx` replicates, `snake 1` puts
+them in series -- the cell has exactly two poly terminals (R1, R2) plus
+the substrate ring (B). `val` in the defaults is plain rho*l/w with `term`
+excluded. Magic weights the corners at **less than a full square**: 20 x
+20.70 extracted as 411.21 um, not 414. Scale the per-segment `l` by the
+ratio and re-extract rather than trusting total/nx.
+
+## Tool traps
+
+* **Magic boots in `minimum.tech`.** `load` of a *non-existent* cell
+  creates it there, and an empty cell DRCs clean and extracts to nothing
+  -- a silent zero. Bit twice (`nwell_ring`, `gen_bg_devices`). Always
+  pass `-rcfile $PDK_ROOT/sky130A/libs.tech/magic/sky130A.magicrc`.
+* **A label in the parent does NOT attach to a subcell's geometry** --
+  it needs parent-level metal at that point. `vinn`/`vinp` floated on
+  `sc_ota` until parent met2/met3 landing patches were added.
+* **`rlabel` alone does not create a port** -- add `port N nsew`.
+* **Magic reorders subckt ports when a cell is instantiated
+  hierarchically.** Always read instance lines against the `.subckt` line
+  in the SAME netlist.
+* **ngspice**: does not expand `$PDK_ROOT` in `.lib`/`.include` (hence
+  `setup/analog/run_ngspice.sh`); `let` vectors live in the current plot
+  and `tran` switches plots, so `$&var` fails in `meas` afterwards -- use
+  literals; `plot` blocks in batch without `quit`.
+* **netgen cannot evaluate SPICE expressions** -- hence
+  `scripts/resolve_params.py`. Prefer hard geometry in LVS netlists.
+* **An ideal `R` or `C` can never match a device instance.** Replace with
+  the PDK model before LVS.
+* **`openroad -gui <file>.odb` fails** -- the positional argument is a Tcl
+  script. Use `read_db` from the console or wrap it in a script.
+* **WSL2: never `find /`** -- it crawls `/mnt/c` over 9p and hangs.
+* **No version control until 2026-11-17.** A `cat >>` with a wrong
+  assumption destroyed this file. `git init` now exists; commit after
+  every block closes.
+
+## Generator method
+
+Generate geometry programmatically, assert what can be asserted, then let
+DRC and extraction disagree with the reasoning. Generators check four
+categories: painted-contact width, same-layer spacing (net-aware, against
+child met1 envelopes too), cross-layer enclosure, and via containment
+against child buses.
+
+Two ordering bugs worth remembering:
+
+* `emit_signals` was called **after** the emit loop and the checks, so 26
+  signal rects were silently discarded. Moving it before both, the checks
+  immediately caught two real opens.
+* `via2` was missing from the emit loop entirely and two cuts were
+  silently dropped. A `LAYERS` set assertion now catches this.
+
+## Block status
+
+| block | DRC | LVS | size (um) |
+|---|---|---|---|
+| `sc_ota` | 0 | match uniquely | 83.42 x 85.28 |
+| `resistor_ref` | 0 | match uniquely | 24.58 x 37.40 |
+| `ota_pair` | 0 | - | 43.24 x 15.25 |
+| `mirror_load` | 0 | - | 10.83 x 15.53 |
+| `bg_mirror` | 0 | - | - |
+| `xm7` / `xm8` | 0 | - | - |
+| `hold_cap` | 0 | - | - |
+| `nwell_ring_bg` | 0 | - | - |
+
+`ota_pair` uses met4 internally, so it **cannot be placed under
+ua[2..7]**.
+
+## Device cell inventory
+
+| cell | W | L | nf | guard | size (um) | DRC |
+|---|---|---|---|---|---|---|
+| `unit_p5_l2` | 5 | 2 | 1 | 0 | 2.94 x 6.00 | 0 |
+| `mir_nref` | 4 | 4 | 1 | 1 | 5.96 x 6.10 | 0 |
+| `ref_n4_l2` | 4 | 2 | 1 | 1 | 3.96 x 6.10 | 0 |
+| `ref_p8_l2` | 8 | 2 | 1 | 1 | 3.96 x 10.19 | 0 |
+| `sw_n1p25` | 1.25 | 0.15 | 1 | 1 | 2.11 x 3.35 | 6 (met1.6) |
+| `sw_p5` | 5 | 0.15 | 1 | 1 | 2.11 x 7.19 | 6 (met1.6) |
+| `rset_1p2m` | - | - | - | 1 | 24.58 x 25.18 | 0 |
+
+`inv_n1` / `inv_p2` were generated but are superseded by the std cell.
+
+## resistor_ref -- CLOSED 2026-11-17
+
+DRC 0, LVS "Circuits match uniquely". 24.58 x 37.40 um. 4 devices, 4 nets.
+Generator `analog/bandgap/scripts/gen_resistor_ref.py` (checks before emit).
+
+Three FETs in a row below the resistor, so neither supply bus crosses the
+414 um of precision poly. 1.2000 Mohm from `res_xhigh_po_0p69`, 20 x
+l=20.84, extracted l_eff 414.01 um.
+
+## Bandgap core (SPICE verified, layout deferred)
+
+Charge-injection error closed from 13.7 mV to **0.92 mV** spread over
+temperature. The debug is worth preserving: three plausible theories were
+wrong -- symmetric-Ron sizing, leakage, settling -- each disproved by a
+measurement that moved the wrong way, before width-scaling confirmed
+injection.
+
+* TG balanced 1:1 made injection **worse** (14.6 -> 17.8 mV); the PMOS had
+  been partly cancelling. A measured sweep found the null at Wp = 4*Wn,
+  where a two-point extrapolation had predicted 65 against the real 40.
+* Longer channels (L 0.5) made it worse by 25 mV -- charge scales with W*L.
+* Switch sizing settled at `bg_nsw` Wn=1.25, `bg_tg` Wn=1.25 / Wp=5.
+* PNP port order is **Collector Base Emitter** -- emitter LAST.
+* Caps: CA = 4x50f, CB = 40x50f, CF = 4x50f, Cp = 150f, CH = 1p.
+
+## Pending
+
+1. `out_buf` layout. Two open TODOs in `analog/out_buf/spice/out_buf.spice`:
+   the NMOS input pair cannot reach 0 V (floor ~0.6-0.7 V) but the cell
+   drives `ua[2]` from the PWM DAC, and `Rz1`/`Cc1` are still ideal and
+   need `cap_mim_m3_1` + a poly resistor.
+2. `bias_gen` layout -- 31-unit common-centroid array.
+3. Top level -- 4 blocks + the 190x130 digital macro in 334.88 x 225.76.
+   Connect `ua[0]`/`ua[1]`, keep `ua[2..7]` clear of met4.
+4. GDS + LEF, precheck (11 checks), submission repo + push.
+   **Precheck has never been run.**
+5. Bandgap core assembly (~21 instances) -- only if time permits.
+6. Bookkeeping: DATASHEET numbers, 10 empty `OWNER` fields.

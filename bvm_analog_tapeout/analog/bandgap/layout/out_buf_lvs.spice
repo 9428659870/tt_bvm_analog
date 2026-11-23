@@ -1,0 +1,52 @@
+* NGSPICE file created from out_buf.ext - technology: sky130A
+
+.subckt cc_1p C2 C1
+X0 C1 C2 sky130_fd_pr__cap_mim_m3_1 l=22.17 w=22.17
+.ends
+
+.subckt rz_4k B R1 R2
+X0 R1 R2 B sky130_fd_pr__res_high_po_0p35 l=4.38
+.ends
+
+.subckt ob_n4_l1 B D S G
+X0 S G D B sky130_fd_pr__nfet_01v8 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=1
+.ends
+
+.subckt ob_p4_l1 B D S G
+X0 S G D B sky130_fd_pr__pfet_01v8 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=1
+.ends
+
+.subckt ob_p20_l0p5_f4 B D0 G S1 D2 S3 a_287_n500#
+X0 S1 G D0 B sky130_fd_pr__pfet_01v8 ad=0.725 pd=5.29 as=1.45 ps=10.58 w=5 l=0.5
+X1 a_287_n500# G S3 B sky130_fd_pr__pfet_01v8 ad=1.45 pd=10.58 as=0.725 ps=5.29 w=5 l=0.5
+X2 S3 G D2 B sky130_fd_pr__pfet_01v8 ad=0.725 pd=5.29 as=0.725 ps=5.29 w=5 l=0.5
+X3 D2 G S1 B sky130_fd_pr__pfet_01v8 ad=0.725 pd=5.29 as=0.725 ps=5.29 w=5 l=0.5
+.ends
+
+.subckt ob_xm7 D S G B
+Xu_dev B D G S D S D ob_p20_l0p5_f4
+.ends
+
+.subckt ob_n16_l1_f4 B D0 G S1 D2 S3 a_487_n400#
+X0 S1 G D0 B sky130_fd_pr__nfet_01v8 ad=0.58 pd=4.29 as=1.16 ps=8.58 w=4 l=1
+X1 a_487_n400# G S3 B sky130_fd_pr__nfet_01v8 ad=1.16 pd=8.58 as=0.58 ps=4.29 w=4 l=1
+X2 D2 G S1 B sky130_fd_pr__nfet_01v8 ad=0.58 pd=4.29 as=0.58 ps=4.29 w=4 l=1
+X3 S3 G D2 B sky130_fd_pr__nfet_01v8 ad=0.58 pd=4.29 as=0.58 ps=4.29 w=4 l=1
+.ends
+
+.subckt ob_xm8 D S G B
+Xu_dev B D G S D S D ob_n16_l1_f4
+.ends
+
+.subckt out_buf vin vout vbias_n VDD VSS
+Xu_cc vout u_rz/R2 cc_1p
+Xu_rz VSS u_m7/G u_rz/R2 rz_4k
+Xu_m1 VSS u_m4/G u_m2/S vout ob_n4_l1
+Xu_m2 VSS u_m7/G u_m2/S vin ob_n4_l1
+Xu_m3 VDD u_m4/G VDD u_m4/G ob_p4_l1
+Xu_m4 VDD u_m7/G VDD u_m4/G ob_p4_l1
+Xu_m7 vout VDD u_m7/G VDD ob_xm7
+Xu_m8 vout VSS vbias_n VSS ob_xm8
+Xu_mtail VSS u_m2/S VSS vbias_n ob_n4_l1
+.ends
+

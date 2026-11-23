@@ -1,0 +1,9 @@
+* NGSPICE file created from ob_n16_l1_f4.ext - technology: sky130A
+
+.subckt ob_n16_l1_f4 B D0 G S1 D2 S3
+X0 S1 G D0 B sky130_fd_pr__nfet_01v8 ad=0.58 pd=4.29 as=1.16 ps=8.58 w=4 l=1
+X1 a_487_n400# G S3 B sky130_fd_pr__nfet_01v8 ad=1.16 pd=8.58 as=0.58 ps=4.29 w=4 l=1
+X2 D2 G S1 B sky130_fd_pr__nfet_01v8 ad=0.58 pd=4.29 as=0.58 ps=4.29 w=4 l=1
+X3 S3 G D2 B sky130_fd_pr__nfet_01v8 ad=0.58 pd=4.29 as=0.58 ps=4.29 w=4 l=1
+.ends
+

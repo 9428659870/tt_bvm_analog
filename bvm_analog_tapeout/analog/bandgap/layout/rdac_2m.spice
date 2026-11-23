@@ -1,0 +1,6 @@
+* NGSPICE file created from rdac_2m.ext - technology: sky130A
+
+.subckt rdac_2m B R1 R2
+X0 R2 R1 B sky130_fd_pr__res_xhigh_po_0p69 l=690.01001
+.ends
+

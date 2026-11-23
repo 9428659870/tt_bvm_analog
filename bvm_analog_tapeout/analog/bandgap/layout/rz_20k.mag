@@ -1,0 +1,56 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794855139
+<< pwell >>
+rect -201 -2750 201 2750
+<< psubdiff >>
+rect -165 2680 -69 2714
+rect 69 2680 165 2714
+rect -165 2618 -131 2680
+rect 131 2618 165 2680
+rect -165 -2680 -131 -2618
+rect 131 -2680 165 -2618
+rect -165 -2714 -69 -2680
+rect 69 -2714 165 -2680
+<< psubdiffcont >>
+rect -69 2680 69 2714
+rect -165 -2618 -131 2618
+rect 131 -2618 165 2618
+rect -69 -2714 69 -2680
+<< xpolycontact >>
+rect -35 2152 35 2584
+rect -35 -2584 35 -2152
+<< ppolyres >>
+rect -35 -2152 35 2152
+<< locali >>
+rect -165 2680 -69 2714
+rect 69 2680 165 2714
+rect -165 2618 -131 2680
+rect 131 2618 165 2680
+rect -165 -2680 -131 -2618
+rect 131 -2680 165 -2618
+rect -165 -2714 -69 -2680
+rect 69 -2714 165 -2680
+<< viali >>
+rect -19 2169 19 2566
+rect -19 -2566 19 -2169
+<< metal1 >>
+rect -25 2566 25 2578
+rect -25 2169 -19 2566
+rect 19 2169 25 2566
+rect -25 2157 25 2169
+rect -25 -2169 25 -2157
+rect -25 -2566 -19 -2169
+rect 19 -2566 25 -2169
+rect -25 -2578 25 -2566
+<< labels >>
+rlabel psubdiffcont 0 -2697 0 -2697 0 B
+port 1 nsew
+rlabel xpolycontact 0 2549 0 2549 0 R1
+port 2 nsew
+rlabel xpolycontact 0 -2549 0 -2549 0 R2
+port 3 nsew
+<< properties >>
+string FIXED_BBOX -148 -2697 148 2697
+<< end >>

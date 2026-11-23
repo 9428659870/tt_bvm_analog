@@ -1,0 +1,6 @@
+* NGSPICE file created from rset_1p2m.ext - technology: sky130A
+
+.subckt rset_1p2m B R1 R2
+X0 R2 R1 B sky130_fd_pr__res_xhigh_po_0p69 l=414.01001
+.ends
+

@@ -1,0 +1,24 @@
+* pwm_dac -- LVS netlist, hierarchy mirrors analog/bandgap/layout/pwm_dac.mag.
+* Port orders are the EXTRACTED ones: rdac_2m is B R1 R2, cc_1p is C2 C1.
+*
+* cc_1p, rz_4k and out_buf's own hierarchy come from out_buf_lvs.spice --
+* defining them again here would be a duplicate .subckt.
+*
+* 2 pF does not fit one MIM (wmax 30 um caps it near 1.82 pF), so each
+* filter stage is two cc_1p in parallel.
+
+.include "../../out_buf/spice/out_buf_lvs.spice"
+
+.subckt rdac_2m B R1 R2
+XR0 R1 R2 B sky130_fd_pr__res_xhigh_po_0p69 l=690.01 mult=1
+.ends rdac_2m
+
+.subckt pwm_dac pwm_in vout vbias_n VDD VSS
+Xu_r1  VSS nf1 pwm_in rdac_2m
+Xu_r2  VSS nf2 nf1    rdac_2m
+Xu_c1a VSS nf1 cc_1p
+Xu_c1b VSS nf1 cc_1p
+Xu_c2a VSS nf2 cc_1p
+Xu_c2b VSS nf2 cc_1p
+Xu_buf nf2 vout vbias_n VDD VSS out_buf
+.ends pwm_dac

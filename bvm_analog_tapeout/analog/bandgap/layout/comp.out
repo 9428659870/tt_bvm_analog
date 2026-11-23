@@ -1,0 +1,357 @@
+
+Circuit 1 cell sky130_fd_pr__nfet_01v8 and Circuit 2 cell sky130_fd_pr__nfet_01v8 are black boxes.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_pr__nfet_01v8         |Circuit 2: sky130_fd_pr__nfet_01v8         
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_pr__nfet_01v8 and sky130_fd_pr__nfet_01v8 are equivalent.
+
+Circuit 1 cell sky130_fd_pr__pfet_01v8 and Circuit 2 cell sky130_fd_pr__pfet_01v8 are black boxes.
+Warning: Equate pins:  cell sky130_fd_pr__pfet_01v8 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_pr__pfet_01v8 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_pr__pfet_01v8         |Circuit 2: sky130_fd_pr__pfet_01v8         
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_pr__pfet_01v8 and sky130_fd_pr__pfet_01v8 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_n4_l015                      |Circuit 2: cd_n4_l015                      
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (1)                |sky130_fd_pr__nfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_n4_l015                      |Circuit 2: cd_n4_l015                      
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_n4_l015 and cd_n4_l015 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_p4_l015                      |Circuit 2: cd_p4_l015                      
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__pfet_01v8 (1)                |sky130_fd_pr__pfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_p4_l015                      |Circuit 2: cd_p4_l015                      
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_p4_l015 and cd_p4_l015 are equivalent.
+
+Circuit 1 cell sky130_fd_pr__cap_mim_m3_1 and Circuit 2 cell sky130_fd_pr__cap_mim_m3_1 are black boxes.
+Warning: Equate pins:  cell sky130_fd_pr__cap_mim_m3_1 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_pr__cap_mim_m3_1 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_pr__cap_mim_m3_1      |Circuit 2: sky130_fd_pr__cap_mim_m3_1      
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_pr__cap_mim_m3_1 and sky130_fd_pr__cap_mim_m3_1 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_n1_l015                      |Circuit 2: cd_n1_l015                      
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (1)                |sky130_fd_pr__nfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_n1_l015                      |Circuit 2: cd_n1_l015                      
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_n1_l015 and cd_n1_l015 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_p2_l015                      |Circuit 2: cd_p2_l015                      
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__pfet_01v8 (1)                |sky130_fd_pr__pfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_p2_l015                      |Circuit 2: cd_p2_l015                      
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_p2_l015 and cd_p2_l015 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_p2_l1                        |Circuit 2: cd_p2_l1                        
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__pfet_01v8 (1)                |sky130_fd_pr__pfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_p2_l1                        |Circuit 2: cd_p2_l1                        
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_p2_l1 and cd_p2_l1 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_n1_l1                        |Circuit 2: cd_n1_l1                        
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (1)                |sky130_fd_pr__nfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_n1_l1                        |Circuit 2: cd_n1_l1                        
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_n1_l1 and cd_n1_l1 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_p8_l015                      |Circuit 2: cd_p8_l015                      
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__pfet_01v8 (1)                |sky130_fd_pr__pfet_01v8 (1)                
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_p8_l015                      |Circuit 2: cd_p8_l015                      
+-------------------------------------------|-------------------------------------------
+G                                          |G                                          
+D                                          |D                                          
+S                                          |S                                          
+B                                          |B                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_p8_l015 and cd_p8_l015 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_nand2                        |Circuit 2: cd_nand2                        
+-------------------------------------------|-------------------------------------------
+cd_n4_l015 (2)                             |cd_n4_l015 (2)                             
+cd_p4_l015 (2)                             |cd_p4_l015 (2)                             
+Number of devices: 4                       |Number of devices: 4                       
+Number of nets: 6                          |Number of nets: 6                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_nand2                        |Circuit 2: cd_nand2                        
+-------------------------------------------|-------------------------------------------
+VDD                                        |VDD                                        
+a                                          |a                                          
+b                                          |b                                          
+y                                          |y                                          
+VSS                                        |VSS                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_nand2 and cd_nand2 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_c40f                         |Circuit 2: cd_c40f                         
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__cap_mim_m3_1 (1)             |sky130_fd_pr__cap_mim_m3_1 (1)             
+Number of devices: 1                       |Number of devices: 1                       
+Number of nets: 2                          |Number of nets: 2                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_c40f                         |Circuit 2: cd_c40f                         
+-------------------------------------------|-------------------------------------------
+C1                                         |C1                                         
+C2                                         |C2                                         
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_c40f and cd_c40f are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_starved_inv                  |Circuit 2: cd_starved_inv                  
+-------------------------------------------|-------------------------------------------
+cd_n1_l015 (1)                             |cd_n1_l015 (1)                             
+cd_p2_l015 (1)                             |cd_p2_l015 (1)                             
+cd_p2_l1 (1)                               |cd_p2_l1 (1)                               
+cd_n1_l1 (1)                               |cd_n1_l1 (1)                               
+Number of devices: 4                       |Number of devices: 4                       
+Number of nets: 7                          |Number of nets: 7                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_starved_inv                  |Circuit 2: cd_starved_inv                  
+-------------------------------------------|-------------------------------------------
+y                                          |y                                          
+a                                          |a                                          
+vbn                                        |vbn                                        
+VDD                                        |VDD                                        
+VSS                                        |VSS                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_starved_inv and cd_starved_inv are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_inv                          |Circuit 2: cd_inv                          
+-------------------------------------------|-------------------------------------------
+cd_n1_l015 (1)                             |cd_n1_l015 (1)                             
+cd_p2_l015 (1)                             |cd_p2_l015 (1)                             
+Number of devices: 2                       |Number of devices: 2                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_inv                          |Circuit 2: cd_inv                          
+-------------------------------------------|-------------------------------------------
+VDD                                        |VDD                                        
+y                                          |y                                          
+a                                          |a                                          
+VSS                                        |VSS                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_inv and cd_inv are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_tg2                          |Circuit 2: cd_tg2                          
+-------------------------------------------|-------------------------------------------
+cd_n1_l015 (2)                             |cd_n1_l015 (2)                             
+Number of devices: 2                       |Number of devices: 2                       
+Number of nets: 6                          |Number of nets: 6                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_tg2                          |Circuit 2: cd_tg2                          
+-------------------------------------------|-------------------------------------------
+sb                                         |sb                                         
+sa                                         |sa                                         
+gb                                         |gb                                         
+ga                                         |ga                                         
+VSS                                        |VSS                                        
+y                                          |y                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_tg2 and cd_tg2 are equivalent.
+
+Subcircuit summary:
+Circuit 1: cd_obuf                         |Circuit 2: cd_obuf                         
+-------------------------------------------|-------------------------------------------
+cd_n4_l015 (1)                             |cd_n4_l015 (1)                             
+cd_p8_l015 (1)                             |cd_p8_l015 (1)                             
+Number of devices: 2                       |Number of devices: 2                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: cd_obuf                         |Circuit 2: cd_obuf                         
+-------------------------------------------|-------------------------------------------
+VDD                                        |VDD                                        
+y                                          |y                                          
+a                                          |a                                          
+VSS                                        |VSS                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cd_obuf and cd_obuf are equivalent.
+
+Subcircuit summary:
+Circuit 1: clk_doubler                     |Circuit 2: clk_doubler                     
+-------------------------------------------|-------------------------------------------
+cd_nand2 (1)                               |cd_nand2 (1)                               
+cd_c40f (4)                                |cd_c40f (4)                                
+cd_starved_inv (4)                         |cd_starved_inv (4)                         
+cd_inv (2)                                 |cd_inv (2)                                 
+cd_tg2 (1)                                 |cd_tg2 (1)                                 
+cd_obuf (1)                                |cd_obuf (1)                                
+Number of devices: 13                      |Number of devices: 13                      
+Number of nets: 14                         |Number of nets: 14                         
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: clk_doubler                     |Circuit 2: clk_doubler                     
+-------------------------------------------|-------------------------------------------
+vbias_n                                    |vbias_n                                    
+clkin                                      |clkin                                      
+VSS                                        |VSS                                        
+VDD                                        |VDD                                        
+en                                         |en                                         
+clkout                                     |clkout                                     
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes clk_doubler and clk_doubler are equivalent.
+
+Final result: Circuits match uniquely.
+.

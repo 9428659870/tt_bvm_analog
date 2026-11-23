@@ -1,0 +1,63 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 0
+use cd_p4_l015 u_g1a
+timestamp 0
+transform 1 0 0 0 1 2700
+box -211 2081 211 3319
+use cd_n4_l015 u_g2a
+timestamp 0
+transform 1 0 0 0 1 1200
+box -211 590 211 1810
+use cd_p4_l015 u_g1b
+timestamp 0
+transform 1 0 700 0 1 2700
+box 489 2081 911 3319
+use cd_n4_l015 u_g2b
+timestamp 0
+transform 1 0 700 0 1 1200
+box 489 590 911 1810
+<< viali >>
+rect -60 626 60 660
+rect -60 3249 60 3283
+rect 141 2672 175 2728
+rect 640 626 760 660
+rect 640 3249 760 3283
+rect 841 1172 875 1228
+rect 841 2672 875 2728
+<< metal1 >>
+rect -111 900 -21 990
+rect -111 2500 -21 2590
+rect -74 612 774 674
+rect -74 3235 774 3297
+rect -45 722 45 768
+rect -45 3141 45 3187
+rect -29 1632 29 2259
+rect 21 1000 679 1090
+rect 21 2655 200 2745
+rect 589 2500 679 2590
+rect 655 722 745 768
+rect 655 3141 745 3187
+rect 671 1632 729 2259
+rect 721 1155 900 1245
+rect 721 2655 900 2745
+<< via1 >>
+rect -96 915 -36 975
+rect -96 2515 -36 2575
+rect 604 2515 664 2575
+<< metal2 >>
+rect -111 900 -21 2590
+rect -111 2500 679 2590
+<< labels >>
+rlabel metal1 0 1945 0 1945 0 a
+port 1 nsew
+rlabel metal1 700 1945 700 1945 0 b
+port 2 nsew
+rlabel metal2 -66 1500 -66 1500 0 y
+port 3 nsew
+rlabel metal1 350 3266 350 3266 0 VDD
+port 4 nsew
+rlabel metal1 350 643 350 643 0 VSS
+port 5 nsew
+<< end >>

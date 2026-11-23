@@ -1,0 +1,141 @@
+VERSION 5.8 ;
+DIVIDERCHAR "/" ;
+BUSBITCHARS "[]" ;
+DESIGN dig_top ;
+UNITS DISTANCE MICRONS 1000 ;
+DIEAREA ( 0 0 ) ( 190000 130000 ) ;
+PINS 33 ;
+    - spi_miso + NET spi_miso + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 46700 130000 ) N ;
+    - pwm1_out + NET pwm1_out + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 71540 130000 ) N ;
+    - pwm0_out + NET pwm0_out + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 74300 130000 ) N ;
+    - spi_sck + NET spi_sck + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 88100 130000 ) N ;
+    - spi_mosi + NET spi_mosi + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 93620 130000 ) N ;
+    - spi_cs_n + NET spi_cs_n + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 96380 130000 ) N ;
+    - rst_n + NET rst_n + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 121220 130000 ) N ;
+    - clk + NET clk + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 123980 130000 ) N ;
+    - ena + NET ena + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 -1000 ) ( 140 0 )
+        + PLACED ( 126740 130000 ) N ;
+    - dbl_en + NET dbl_en + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 43780 0 ) S ;
+    - pwm0_clk + NET pwm0_clk + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 48000 0 ) S ;
+    - pwm0_clk_sel + NET pwm0_clk_sel + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 51000 0 ) S ;
+    - pwm1_clk + NET pwm1_clk + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 54000 0 ) S ;
+    - pwm1_clk_sel + NET pwm1_clk_sel + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 57000 0 ) S ;
+    - bias_trim[0] + NET bias_trim[0] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 63440 0 ) S ;
+    - bias_trim[1] + NET bias_trim[1] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 68440 0 ) S ;
+    - bias_trim[2] + NET bias_trim[2] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 74440 0 ) S ;
+    - bias_trim[3] + NET bias_trim[3] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 82440 0 ) S ;
+    - bias_trim[4] + NET bias_trim[4] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 93440 0 ) S ;
+    - bias_en + NET bias_en + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 107440 0 ) S ;
+    - bias_ok + NET bias_ok + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 112000 0 ) S ;
+    - cap + NET cap + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 125000 0 ) S ;
+    - phi1 + NET phi1 + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 130000 0 ) S ;
+    - phi2 + NET phi2 + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 135000 0 ) S ;
+    - ota_en + NET ota_en + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 140000 0 ) S ;
+    - bg_trim[0] + NET bg_trim[0] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 145000 0 ) S ;
+    - bg_trim[1] + NET bg_trim[1] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 150000 0 ) S ;
+    - bg_trim[2] + NET bg_trim[2] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 155000 0 ) S ;
+    - bg_trim[3] + NET bg_trim[3] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 160000 0 ) S ;
+    - bg_en + NET bg_en + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 165000 0 ) S ;
+    - i8_en + NET i8_en + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 170000 0 ) S ;
+    - bg_valid + NET bg_valid + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 175000 0 ) S ;
+    - bg_ok_combined + NET bg_ok_combined + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER met2 ( -140 0 ) ( 140 1000 )
+        + PLACED ( 180000 0 ) S ;
+END PINS
+END DESIGN

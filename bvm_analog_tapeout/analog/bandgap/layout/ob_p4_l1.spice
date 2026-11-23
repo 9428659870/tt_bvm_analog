@@ -1,0 +1,6 @@
+* NGSPICE file created from ob_p4_l1.ext - technology: sky130A
+
+.subckt ob_p4_l1 B D S G
+X0 S G D B sky130_fd_pr__pfet_01v8 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=1
+.ends
+

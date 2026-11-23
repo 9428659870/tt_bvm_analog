@@ -1,0 +1,6 @@
+* NGSPICE file created from dev_n10_l015.ext - technology: sky130A
+
+.subckt dev_n10_l015 B D S G
+X0 S G D B sky130_fd_pr__nfet_01v8 ad=2.9 pd=20.58 as=2.9 ps=20.58 w=10 l=0.15
+.ends
+

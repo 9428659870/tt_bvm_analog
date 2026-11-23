@@ -1,0 +1,47 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 0
+use ob_n16_l1_f4 u_dev
+timestamp 0
+transform 1 0 0 0 1 0
+box -683 -610 683 610
+<< viali >>
+rect -395 -574 -305 -540
+rect -45 -574 45 -540
+rect 305 -574 395 -540
+<< metal1 >>
+rect -561 205 -471 295
+rect -45 205 45 295
+rect 471 205 561 295
+rect -303 -295 -213 -205
+rect 213 -295 303 -205
+rect -45 432 45 530
+rect -410 -602 -290 -512
+rect -60 -602 60 -512
+rect 290 -602 410 -512
+<< via1 >>
+rect -546 220 -486 280
+rect -30 220 30 280
+rect 486 220 546 280
+rect -288 -280 -228 -220
+rect 228 -280 288 -220
+rect -30 451 30 511
+rect -380 -587 -320 -527
+rect -30 -587 30 -527
+rect 320 -587 380 -527
+<< metal2 >>
+rect -561 150 561 350
+rect -303 -350 303 -150
+rect -45 431 45 531
+rect -410 -602 410 -512
+<< labels >>
+rlabel metal2 -516 250 -516 250 0 D
+port 1 nsew
+rlabel metal2 -258 -250 -258 -250 0 S
+port 2 nsew
+rlabel metal2 0 481 0 481 0 G
+port 3 nsew
+rlabel metal2 -350 -557 -350 -557 0 B
+port 4 nsew
+<< end >>

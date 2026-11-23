@@ -1,0 +1,79 @@
+* NGSPICE file created from clk_doubler.ext - technology: sky130A
+
+.subckt cd_n4_l015 B D S G
+X0 S G D B sky130_fd_pr__nfet_01v8 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=0.15
+.ends
+
+.subckt cd_p4_l015 B D S G
+X0 S G D B sky130_fd_pr__pfet_01v8 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=0.15
+.ends
+
+.subckt cd_nand2 a b VDD VSS y
+Xu_g2a VSS y u_g2b/D a cd_n4_l015
+Xu_g2b VSS u_g2b/D VSS b cd_n4_l015
+Xu_g1a VDD y VDD a cd_p4_l015
+Xu_g1b VDD y VDD b cd_p4_l015
+.ends
+
+.subckt cd_c40f C2 C1
+X0 C1 C2 sky130_fd_pr__cap_mim_m3_1 l=4.29 w=4.29
+.ends
+
+.subckt cd_n1_l015 B D S G
+X0 S G D B sky130_fd_pr__nfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=0.15
+.ends
+
+.subckt cd_p2_l015 B D S G
+X0 S G D B sky130_fd_pr__pfet_01v8 ad=0.58 pd=4.58 as=0.58 ps=4.58 w=2 l=0.15
+.ends
+
+.subckt cd_p2_l1 B D S G
+X0 S G D B sky130_fd_pr__pfet_01v8 ad=0.58 pd=4.58 as=0.58 ps=4.58 w=2 l=1
+.ends
+
+.subckt cd_n1_l1 B D S G
+X0 S G D B sky130_fd_pr__nfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=1
+.ends
+
+.subckt cd_starved_inv y vbn a VDD VSS
+Xu_mn VSS y u_mn/S a cd_n1_l015
+Xu_mp VDD y u_mp/S a cd_p2_l015
+Xu_mps VDD u_mp/S VDD vbn cd_p2_l1
+Xu_mns VSS u_mn/S VSS vbn cd_n1_l1
+.ends
+
+.subckt cd_inv a y VDD VSS
+Xu_mn VSS y VSS a cd_n1_l015
+Xu_mp VDD y VDD a cd_p2_l015
+.ends
+
+.subckt cd_tg2 ga gb y sa sb VSS
+Xu_tg1a VSS y sa ga cd_n1_l015
+Xu_tg1b VSS y sb gb cd_n1_l015
+.ends
+
+.subckt cd_p8_l015 B D S G
+X0 S G D B sky130_fd_pr__pfet_01v8 ad=2.32 pd=16.58 as=2.32 ps=16.58 w=8 l=0.15
+.ends
+
+.subckt cd_obuf a y VDD VSS
+Xu_mn VSS y VSS a cd_n4_l015
+Xu_mp VDD y VDD a cd_p8_l015
+.ends
+
+.subckt clk_doubler clkin clkout en vbias_n VDD VSS
+Xu_nand u_tg/y en VDD VSS u_obuf/a cd_nand2
+Xu_cd1 VSS u_d2/a cd_c40f
+Xu_cd2 VSS u_d3/a cd_c40f
+Xu_cd4 VSS u_d4/y cd_c40f
+Xu_cd3 VSS u_d4/a cd_c40f
+Xu_d1 u_d2/a vbias_n clkin VDD VSS cd_starved_inv
+Xu_inv1 clkin u_tg/gb VDD VSS cd_inv
+Xu_d2 u_d3/a vbias_n u_d2/a VDD VSS cd_starved_inv
+Xu_tg clkin u_tg/gb u_tg/y u_d4/y u_tg/sb VSS cd_tg2
+Xu_inv2 u_d4/y u_tg/sb VDD VSS cd_inv
+Xu_d3 u_d4/a vbias_n u_d3/a VDD VSS cd_starved_inv
+Xu_obuf u_obuf/a clkout VDD VSS cd_obuf
+Xu_d4 u_d4/y vbias_n u_d4/a VDD VSS cd_starved_inv
+.ends
+

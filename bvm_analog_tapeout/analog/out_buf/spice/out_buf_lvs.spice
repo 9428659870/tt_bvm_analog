@@ -1,0 +1,58 @@
+* out_buf -- LVS netlist, hierarchy mirrors analog/bandgap/layout/out_buf.mag.
+* Port orders are taken from the EXTRACTED netlist, not assumed: magic
+* reorders ports when a cell is instantiated hierarchically.
+*
+* The multi-finger wrappers expose seven child ports because the fifth
+* diffusion contact is unlabelled in the device cell; it belongs on the D
+* side, so the pattern is B D G S D S D.  Leaving it out strands a finger
+* and gives W=15 instead of 20.
+
+.subckt ob_n4_l1 B D S G
+XM0 D G S B sky130_fd_pr__nfet_01v8 L=1 W=4 nf=1 m=1
+.ends ob_n4_l1
+
+.subckt ob_p4_l1 B D S G
+XM0 D G S B sky130_fd_pr__pfet_01v8 L=1 W=4 nf=1 m=1
+.ends ob_p4_l1
+
+.subckt ob_p20_l0p5_f4 B D0 G S1 D2 S3 D4
+XM0 D0 G S1 B sky130_fd_pr__pfet_01v8 L=0.5 W=5 nf=1 m=1
+XM1 S1 G D2 B sky130_fd_pr__pfet_01v8 L=0.5 W=5 nf=1 m=1
+XM2 D2 G S3 B sky130_fd_pr__pfet_01v8 L=0.5 W=5 nf=1 m=1
+XM3 S3 G D4 B sky130_fd_pr__pfet_01v8 L=0.5 W=5 nf=1 m=1
+.ends ob_p20_l0p5_f4
+
+.subckt ob_xm7 D S G B
+Xu_dev B D G S D S D ob_p20_l0p5_f4
+.ends ob_xm7
+
+.subckt ob_n16_l1_f4 B D0 G S1 D2 S3 D4
+XM0 D0 G S1 B sky130_fd_pr__nfet_01v8 L=1 W=4 nf=1 m=1
+XM1 S1 G D2 B sky130_fd_pr__nfet_01v8 L=1 W=4 nf=1 m=1
+XM2 D2 G S3 B sky130_fd_pr__nfet_01v8 L=1 W=4 nf=1 m=1
+XM3 S3 G D4 B sky130_fd_pr__nfet_01v8 L=1 W=4 nf=1 m=1
+.ends ob_n16_l1_f4
+
+.subckt ob_xm8 D S G B
+Xu_dev B D G S D S D ob_n16_l1_f4
+.ends ob_xm8
+
+.subckt rz_4k B R1 R2
+XR0 R1 R2 B sky130_fd_pr__res_high_po_0p35 l=4.38 mult=1
+.ends rz_4k
+
+.subckt cc_1p C2 C1
+XC0 C1 C2 sky130_fd_pr__cap_mim_m3_1 l=22.17 w=22.17
+.ends cc_1p
+
+.subckt out_buf vin vout vbias_n VDD VSS
+Xu_mtail VSS ntail   VSS     vbias_n ob_n4_l1
+Xu_m1    VSS n1      ntail   vout    ob_n4_l1
+Xu_m2    VSS n2      ntail   vin     ob_n4_l1
+Xu_m3    VDD n1      VDD     n1      ob_p4_l1
+Xu_m4    VDD n2      VDD     n1      ob_p4_l1
+Xu_m7    vout VDD    n2      VDD     ob_xm7
+Xu_m8    vout VSS    vbias_n VSS     ob_xm8
+Xu_rz    VSS  n2     nz              rz_4k
+Xu_cc    vout nz                     cc_1p
+.ends out_buf

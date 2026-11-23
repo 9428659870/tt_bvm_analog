@@ -1,0 +1,21 @@
+* NGSPICE file created from resistor_ref.ext - technology: sky130A
+
+.subckt ref_n4_l2 B D S G
+X0 S G D B sky130_fd_pr__nfet_01v8 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=2
+.ends
+
+.subckt ref_p8_l2 B D S G
+X0 S G D B sky130_fd_pr__pfet_01v8 ad=2.32 pd=16.58 as=2.32 ps=16.58 w=8 l=2
+.ends
+
+.subckt rset_1p2m B R1 R2
+X0 R2 R1 B sky130_fd_pr__res_xhigh_po_0p69 l=414.01001
+.ends
+
+.subckt resistor_ref iout_n iout_p VDD VSS
+Xu_mnm VSS iout_p VSS iout_n ref_n4_l2
+Xu_mn VSS iout_n VSS iout_n ref_n4_l2
+Xu_mp VDD iout_p VDD iout_p ref_p8_l2
+Xu_rset VSS VDD iout_n rset_1p2m
+.ends
+

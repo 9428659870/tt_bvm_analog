@@ -1,0 +1,6 @@
+* NGSPICE file created from unit_n10_l4.ext - technology: sky130A
+
+.subckt unit_n10_l4 D S G
+X0 S G D VSUBS sky130_fd_pr__nfet_01v8 ad=2.9 pd=20.58 as=2.9 ps=20.58 w=10 l=4
+.ends
+

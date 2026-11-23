@@ -1,0 +1,7 @@
+* NGSPICE file created from dev_n80_l4_f2.ext - technology: sky130A
+
+.subckt dev_n80_l4_f2 B D0 G0 S1 G1
+X0 a_829_n4000# G1 S1 B sky130_fd_pr__nfet_01v8 ad=11.6 pd=80.58 as=5.8 ps=40.29 w=40 l=4
+X1 S1 G0 D0 B sky130_fd_pr__nfet_01v8 ad=5.8 pd=40.29 as=11.6 ps=80.58 w=40 l=4
+.ends
+

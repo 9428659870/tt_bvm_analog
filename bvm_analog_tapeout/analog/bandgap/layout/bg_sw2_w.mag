@@ -1,0 +1,37 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 0
+use bg_sw2 u_dev
+timestamp 0
+transform 1 0 0 0 1 0
+box -263 -610 263 610
+<< viali >>
+rect -45 -574 45 -540
+<< metal1 >>
+rect -141 205 -51 295
+rect 51 205 141 295
+rect -45 -295 45 -205
+rect -45 432 45 531
+rect -60 -602 60 -512
+<< via1 >>
+rect -126 220 -66 280
+rect 66 220 126 280
+rect -30 -280 30 -220
+rect -30 451 30 511
+rect -30 -587 30 -527
+<< metal2 >>
+rect -141 150 141 350
+rect -45 -350 45 -150
+rect -45 431 45 531
+rect -60 -602 60 -512
+<< labels >>
+rlabel metal2 -96 250 -96 250 0 D
+port 1 nsew
+rlabel metal2 0 -250 0 -250 0 S
+port 2 nsew
+rlabel metal2 0 481 0 481 0 G
+port 3 nsew
+rlabel metal2 0 -557 0 -557 0 B
+port 4 nsew
+<< end >>

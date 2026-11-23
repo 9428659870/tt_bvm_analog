@@ -1,0 +1,6 @@
+* NGSPICE file created from rz_4k.ext - technology: sky130A
+
+.subckt rz_4k B R1 R2
+X0 R1 R2 B sky130_fd_pr__res_high_po_0p35 l=4.38
+.ends
+

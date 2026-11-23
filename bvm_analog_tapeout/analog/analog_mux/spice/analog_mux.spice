@@ -1,0 +1,36 @@
+* ============================================================
+* analog_mux.spice -- 4:1 CMOS transmission-gate analog multiplexer
+*
+* Selects one of 4 internal analog outputs onto the single ua[0] pin:
+*   mux_sel = 2'b00 : in0_vref  (buffered VREF from out_buf)
+*   mux_sel = 2'b01 : in1_ibias (bias current monitor from bias_gen)
+*   mux_sel = 2'b10 : in2_dac   (filtered DAC voltage from pwm_dac)
+*   mux_sel = 2'b11 : in3_clk2x (doubled clock from clk_doubler)
+* ============================================================
+
+.subckt analog_mux in0_vref in1_ibias in2_dac in3_clk2x sel0 sel1 mux_out VDD VSS
+
+* ---- select inverters ------------------------------------------
+XMinv0p sel0_n sel0 VDD VDD sky130_fd_pr__pfet_01v8 w=2 l=0.15
+XMinv0n sel0_n sel0 VSS VSS sky130_fd_pr__nfet_01v8 w=1 l=0.15
+XMinv1p sel1_n sel1 VDD VDD sky130_fd_pr__pfet_01v8 w=2 l=0.15
+XMinv1n sel1_n sel1 VSS VSS sky130_fd_pr__nfet_01v8 w=1 l=0.15
+
+* ---- Stage 1: sel0 selects (in0 vs in1) and (in2 vs in3) -------
+XMtg0n mid0 sel0_n in0_vref  VSS sky130_fd_pr__nfet_01v8 w=4 l=0.15
+XMtg0p mid0 sel0   in0_vref  VDD sky130_fd_pr__pfet_01v8 w=8 l=0.15
+XMtg1n mid0 sel0   in1_ibias VSS sky130_fd_pr__nfet_01v8 w=4 l=0.15
+XMtg1p mid0 sel0_n in1_ibias VDD sky130_fd_pr__pfet_01v8 w=8 l=0.15
+
+XMtg2n mid1 sel0_n in2_dac   VSS sky130_fd_pr__nfet_01v8 w=4 l=0.15
+XMtg2p mid1 sel0   in2_dac   VDD sky130_fd_pr__pfet_01v8 w=8 l=0.15
+XMtg3n mid1 sel0   in3_clk2x VSS sky130_fd_pr__nfet_01v8 w=4 l=0.15
+XMtg3p mid1 sel0_n in3_clk2x VDD sky130_fd_pr__pfet_01v8 w=8 l=0.15
+
+* ---- Stage 2: sel1 selects (mid0 vs mid1) -> mux_out -----------
+XMtg4n mux_out sel1_n mid0 VSS sky130_fd_pr__nfet_01v8 w=4 l=0.15
+XMtg4p mux_out sel1   mid0 VDD sky130_fd_pr__pfet_01v8 w=8 l=0.15
+XMtg5n mux_out sel1   mid1 VSS sky130_fd_pr__nfet_01v8 w=4 l=0.15
+XMtg5p mux_out sel1_n mid1 VDD sky130_fd_pr__pfet_01v8 w=8 l=0.15
+
+.ends analog_mux

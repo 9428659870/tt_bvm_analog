@@ -1,0 +1,7 @@
+* NGSPICE file created from dev_p20_l1_f2.ext - technology: sky130A
+
+.subckt dev_p20_l1_f2 D0 G0 S1 G1
+X0 a_229_n1000# G1 S1 w_n323_n1100# sky130_fd_pr__pfet_01v8 ad=2.9 pd=20.58 as=1.45 ps=10.29 w=10 l=1
+X1 S1 G0 D0 w_n323_n1100# sky130_fd_pr__pfet_01v8 ad=1.45 pd=10.29 as=2.9 ps=20.58 w=10 l=1
+.ends
+

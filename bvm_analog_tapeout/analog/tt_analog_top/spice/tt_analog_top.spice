@@ -1,0 +1,54 @@
+* ============================================================
+* tt_analog_top.spice -- LVS-clean tile-level schematic netlist
+*
+* Uses the actual laid-out subcircuits from analog/bandgap/layout/
+* (resistor_ref, bias_gen, out_buf, pwm_dac, clk_doubler) and
+* blackboxes the hardened digital macro (dig_top).
+* ============================================================
+
+.include "../../bandgap/layout/resistor_ref_lvs.spice"
+.include "../../bandgap/layout/bias_gen_lvs.spice"
+.include "../../bandgap/layout/out_buf_lvs.spice"
+.include "../../bandgap/layout/pwm_dac_lvs.spice"
+.include "../../bandgap/layout/clk_doubler_ext.spice"
+
+.subckt tt_analog_top
++ ua0 ua1 ua2
++ clk ena rst_n
++ uio0 uio1 uio2 uio3
++ uo0 uo1
++ VDPWR VGND
+
+* ---- Hardened digital macro (blackbox for LVS) -----------------
+Xdig
++ clk rst_n ena
++ uio0 uio3 uio1 uio2
++ VDPWR
++ clk clk
++ uo0 uo1
++ bg_en bg_trim3 bg_trim2 bg_trim1 bg_trim0
++ bias_en bias_trim4 bias_trim3 bias_trim2 bias_trim1 bias_trim0
++ dbl_en
++ pwm0_clk_sel pwm1_clk_sel
++ phi1 phi2 cap ota_en i8_en
++ bg_valid bg_ok_combined
++ dig_top
+
+* ---- Supply-referenced current reference -----------------------
+Xref nbias_n vref VDPWR VGND resistor_ref
+
+* ---- 5-bit binary-weighted bias generator (iout -> ua[1]) ------
+Xbias nbias_n
++     bias_trim0 bias_trim1 bias_trim2 bias_trim3 bias_trim4
++     bias_en ua1 VDPWR VGND bias_gen
+
+* ---- Reference output buffer (vout -> ua[0]) -------------------
+Xbuf0 vref ua0 nbias_n VDPWR VGND out_buf
+
+* ---- Clock doubler ---------------------------------------------
+Xdbl clk clk2x dbl_en nbias_n VDPWR VGND clk_doubler
+
+* ---- 2-stage RC PWM DAC (vout -> ua[2]) ------------------------
+Xdac uo0 ua2 nbias_n VDPWR VGND pwm_dac
+
+.ends tt_analog_top

@@ -1,0 +1,115 @@
+* ============================================================
+* bandgap_core.spice -- transistor-level SC bandgap core
+*
+* Replaces tb_sc_ideal.spice's `.model SWI sw ron=1` switches and
+* behavioural current sources with real devices. Topology, phase
+* timing and capacitor ratios are UNCHANGED -- this must reproduce
+* the ideal testbench's VREF, which is the acceptance criterion.
+*
+*     VREF = (C_A*VBE(8I) + C_B*dVBE) / C_F
+*
+* Option D: ONE time-shared PNP. bg_seq.v already drives
+* i8_en <= (state == P1), so the 8:1 ratio is in TIME, not area.
+*
+* SWITCH CHOICE IS SET BY SIGNAL LEVEL, not by preference:
+*   ve ~0.7 V and ground            -> plain NMOS, Vgs = 1.1 V or more
+*   nout, vref, X at/above mid-rail -> transmission gate; an NMOS pass
+*     gate there has only ~0.55 V of overdrive against a 0.4-0.7 V Vth
+*
+* COMPLEMENTS ARE GENERATED LOCALLY. dig_top is already hardened and
+* LVS/DRC clean; adding phi1b/phi2b/capxb/i8enb outputs would mean
+* re-running the whole digital flow to save four inverters.
+*
+* CURRENT STEERING, NOT A SWITCHED SOURCE. The 7 extra units go to the
+* emitter in phi1 and are DUMPED TO VSS in phi2. A series switch would
+* leave the mirror drain floating; a parallel one would short the
+* emitter. Steering keeps every node defined and the mirror gate still.
+* ============================================================
+
+* ---- helper cells ---------------------------------------------
+.subckt bg_inv a y VDD VSS
+XMN y a VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XMP y a VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=2 nf=1 m=1
+.ends bg_inv
+
+* NMOS pass gate: only for nodes at or below ~0.9 V
+.subckt bg_nsw a b g VSS
+XMN a g b VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1.25 nf=1 m=1
+.ends bg_nsw
+
+* full transmission gate: for anything near or above mid-rail
+.subckt bg_tg a b g gb VDD VSS
+XMN a g  b VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1.25 nf=1 m=1
+* W=20 gives symmetric Ron, but what must cancel at a summing node is
+* CHARGE, which scales with W*L -- equal area, not equal conductance.
+* A 2:1 width ratio left ~3 fC net injection on X, and
+* dVREF = dQ/C_F = 3 fC / 200 fF = 15 mV.
+XMP a gb b VDD sky130_fd_pr__pfet_01v8 L=0.15 W=5 nf=1 m=1
+.ends bg_tg
+
+* ============================================================
+.subckt bandgap_core vref x nout ve phi1 phi2 capx i8_en ota_en
++       vbias_n vcm VDD VSS
+
+* ---- local phase complements -----------------------------------
+Xinv1 phi1  phi1b VDD VSS bg_inv
+Xinv2 phi2  phi2b VDD VSS bg_inv
+Xinv3 capx  capxb VDD VSS bg_inv
+Xinv4 i8_en i8enb VDD VSS bg_inv
+
+* ---- current mirror: vbias_n -> PMOS, 1 unit + 7 steered -------
+* W=4 L=4 against the OTA tail's W=16 L=4 puts I1 near 0.5 uA.
+XMnref npd vbias_n VSS VSS sky130_fd_pr__nfet_01v8 L=4 W=4  nf=1 m=1
+XMpd   npd npd     VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=5  nf=1 m=1
+XMp1   ve  npd     VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=5  nf=1 m=1
+XMp7   nx8 npd     VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=5  nf=1 m=7
+
+* steering: emitter in phi1, VSS in phi2
+XS8a nx8 ve  i8_en VSS bg_nsw
+XS8b nx8 VSS i8enb VSS bg_nsw
+
+* ---- the PNP ---------------------------------------------------
+* .subckt  sky130_fd_pr__pnp_05v5_W3p40L3p40 Collector Base Emitter
+* Emitter LAST. Collector and base are both p-substrate, so this is
+* only ever used diode-connected.
+XQ1 VSS VSS ve sky130_fd_pr__pnp_05v5_W3p40L3p40
+
+* ---- capacitor array (mim_array) -------------------------------
+* Unit = 50 fF. mim_array holds VBE=4u, DVBE=32u, OTAOUT=4u and the
+* TRIM8/4/2/1 bank, so C_B = 32 + code units.
+.param Cu   = 50f
+.param CA   = '4*Cu'
+.param CB   = '40*Cu'
+.param CF   = '4*Cu'
+.param Cp   = 150f
+
+* C_A bottom: V_E in phi1, ground in phi2 -- both below mid-rail
+XS1 ve  ca_b phi1 VSS bg_nsw
+XS2 VSS ca_b phi2 VSS bg_nsw
+CAc ca_b x {CA}
+
+* C_B bottom: hard-wired to the emitter (option D)
+CBc ve x {CB}
+
+* C_F far plate: ground in phi1, OTA output in phi2.
+* S6 sees nout, which swings to 1.75 V -> transmission gate.
+XS5 VSS cf_b phi1 VSS bg_nsw
+XS6 nout cf_b phi2 phi2b VDD VSS bg_tg
+CFc cf_b x {CF}
+
+Cpar x VSS {Cp}
+Rxbleed x VSS 1T
+
+* ---- OTA -------------------------------------------------------
+Xota vcm x nout ota_en vbias_n VDD VSS sc_ota
+
+* auto-zero: X to the output in phi1. X is the summing node, so this
+* switch's charge injection lands directly on Cp -- a TG, whose NMOS
+* and PMOS injections partly cancel, not a bare NMOS.
+XS7 x nout phi1 phi1b VDD VSS bg_tg
+
+* ---- capture onto the hold capacitor ---------------------------
+XS8 nout vref capx capxb VDD VSS bg_tg
+CHc vref VSS 1p
+
+.ends bandgap_core

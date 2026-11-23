@@ -1,0 +1,20 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 0
+<< metal1 >>
+rect 350 -90 550 90
+rect 550 -40 1400 40
+<< via1 >>
+rect 400 -40 500 40
+<< metal2 >>
+rect 350 -90 550 90
+<< via2 >>
+rect 400 -40 500 40
+<< labels >>
+rlabel metal1 1300 0 1300 0 0 PROBE1
+use mimcap_unit  dut
+timestamp 0
+transform 1 0 0 0 1 0
+box -716 -540 364 540
+<< end >>

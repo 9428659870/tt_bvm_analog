@@ -1,0 +1,12 @@
+* NGSPICE file created from via1_probe.ext - technology: sky130A
+
+.subckt mimcap_unit C2 C1
+X0 C1 C2 sky130_fd_pr__cap_mim_m3_1 l=5 w=5
+.ends
+
+
+* Top level circuit via1_probe
+
+Xdut PROBE1 dut/C1 mimcap_unit
+.end
+
