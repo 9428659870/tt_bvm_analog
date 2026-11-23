@@ -45,5 +45,10 @@ mismatches are usually a missing tap or a shorted net.
 Everything here needs it set:
 
 ```bash
-export PDK_ROOT=$HOME/.ciel/ciel/sky130/versions/<hash>
+export PDK_ROOT=$HOME/.volare   # sky130A -> volare/sky130/versions/0fe599b2...
 ```
+
+xschem: run `xschem <block>.sch` from a block's `xschem/` dir; the
+local `xschemrc` there sources this one. New blocks need the same
+one-line `xschemrc` and an entry in the block list in this file.
+The rc falls back to `~/.volare` if `PDK_ROOT` is unset.

@@ -1,0 +1,3 @@
+# Block-local xschemrc: xschem reads ./xschemrc when started in this
+# directory. All settings live in the project-level file below.
+source [file normalize [file join [file dirname [info script]] ../../../setup/analog/xschemrc]]
